@@ -4,7 +4,7 @@
     "name": "Python SDK",
     "description": "Install via pip and use the SZGFClient to fetch and validate guides programmatically.",
     "status": "available",
-    "url": "https://github.com/seriaati/zzz-guides",
+    "url": "https://github.com/seriaati/szgf",
     "installCommand": "pip install szgf",
     "example": "from szgf.client import SZGFClient\nclient = SZGFClient()\nawait client.download_guides()\nguides = await client.read_guides()"
   },

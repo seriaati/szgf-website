@@ -38,7 +38,7 @@ const Header = () => {
 
           <div className="flex items-center gap-1">
             <a
-              href="https://gh.seria.moe/zzz-guides"
+              href="https://docs.szgf.seria.moe"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -56,7 +56,7 @@ const Header = () => {
               </Button>
             </a>
             <a
-              href="https://github.com/seriaati/zzz-guides"
+              href="https://github.com/seriaati/szgf"
               target="_blank"
               rel="noopener noreferrer"
             >

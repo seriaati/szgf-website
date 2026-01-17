@@ -33,7 +33,7 @@ const Hero = () => {
                 <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>
             </a>
-            <a href="https://gh.seria.moe/zzz-guides" target="_blank" rel="noopener noreferrer">
+            <a href="https://docs.szgf.seria.moe" target="_blank" rel="noopener noreferrer">
               <Button variant="outline" size="lg">
                 Read Documentation
                 <ExternalLink className="h-4 w-4" />
