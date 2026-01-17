@@ -1,0 +1,20 @@
+[
+  {
+    "id": "python",
+    "name": "Python SDK",
+    "description": "Install via pip and use the SZGFClient to fetch and validate guides programmatically.",
+    "status": "available",
+    "url": "https://github.com/seriaati/zzz-guides",
+    "installCommand": "pip install szgf",
+    "example": "from szgf.client import SZGFClient\nclient = SZGFClient()\nawait client.download_guides()\nguides = await client.read_guides()"
+  },
+  {
+    "id": "typescript",
+    "name": "TypeScript SDK",
+    "description": "Native TypeScript support for Node.js and browser environments.",
+    "status": "coming-soon",
+    "url": null,
+    "installCommand": null,
+    "example": null
+  }
+]

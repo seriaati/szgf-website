@@ -1,0 +1,56 @@
+[
+  {
+    "version": "0.1.4",
+    "date": "2026-01-13",
+    "changes": [
+      {
+        "type": "changed",
+        "description": "Make \"Description\" field in skill priority section optional"
+      }
+    ]
+  },
+  {
+    "version": "0.1.3",
+    "date": "2026-01-11",
+    "changes": [
+      {
+        "type": "added",
+        "description": "\"Author\" field"
+      },
+      {
+        "type": "added",
+        "description": "\"Last updated\" field"
+      }
+    ]
+  },
+  {
+    "version": "0.1.2",
+    "date": "2025-06-28",
+    "changes": [
+      {
+        "type": "added",
+        "description": "\"Rotation\" section"
+      }
+    ]
+  },
+  {
+    "version": "0.1.1",
+    "date": "2025-06-23",
+    "changes": [
+      {
+        "type": "added",
+        "description": "Field descriptions"
+      }
+    ]
+  },
+  {
+    "version": "0.1.0",
+    "date": "2025-06-22",
+    "changes": [
+      {
+        "type": "added",
+        "description": "Initial release"
+      }
+    ]
+  }
+]
