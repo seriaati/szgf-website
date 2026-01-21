@@ -12,9 +12,9 @@
     "id": "typescript",
     "name": "TypeScript SDK",
     "description": "Native TypeScript support for Node.js and browser environments.",
-    "status": "coming-soon",
-    "url": null,
-    "installCommand": null,
-    "example": null
+    "status": "available",
+    "url": "https://github.com/seriaati/szgf/tree/main/szgf-ts",
+    "installCommand": "npm install szgf",
+    "example": "import { SZGFClient } from 'szgf';\n\nconst client = new SZGFClient();\nawait client.downloadGuides();\nconst guides = await client.readGuides();"
   }
 ]
