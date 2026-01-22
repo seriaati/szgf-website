@@ -10,7 +10,7 @@ import {
   getGuidesSortedByLastUpdated,
   searchGuides,
 } from "@/services/guideService";
-import { formatDate, getRarityColor, formatRarity, formatElement, formatSpecialty, getElementIcon, getElementColor, getSpecialtyIcon } from "@/lib/guideParser";
+import { formatDate, formatElement, formatSpecialty, getElementIcon, getElementColor, getSpecialtyIcon } from "@/lib/guideParser";
 
 const Guides = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -111,16 +111,9 @@ const Guides = () => {
 
                         {/* Info */}
                         <div className="p-4">
-                          <div className="flex items-center justify-between mb-2">
-                            <h2 className="text-xl font-bold">
-                              {guide.character.name}
-                            </h2>
-                            <span
-                              className={`text-sm font-semibold ${getRarityColor(guide.character.rarity)}`}
-                            >
-                              {formatRarity(guide.character.rarity)}
-                            </span>
-                          </div>
+                          <h2 className="text-xl font-bold mb-2">
+                            {guide.character.name}
+                          </h2>
 
                           <div className="flex items-center gap-4 text-sm text-muted-foreground">
                             <span className="flex items-center gap-1">
