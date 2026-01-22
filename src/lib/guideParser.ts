@@ -123,12 +123,13 @@ const ELEMENT_MAP: Record<number, { name: string; color: string; icon: string }>
 };
 
 // Specialty IDs from ZZZ game data
-const SPECIALTY_MAP: Record<number, string> = {
-  1: "Attack",
-  2: "Stun",
-  3: "Anomaly",
-  4: "Support",
-  5: "Defense",
+const SPECIALTY_MAP: Record<number, { name: string; icon: string }> = {
+  1: { name: "Attack", icon: "/attack.webp" },
+  2: { name: "Stun", icon: "/stun.webp" },
+  3: { name: "Anomaly", icon: "/anomaly.webp" },
+  4: { name: "Support", icon: "/support.webp" },
+  5: { name: "Defense", icon: "/defense.webp" },
+  6: { name: "Rupture", icon: "/rupture.webp" },
 };
 
 /**
@@ -196,7 +197,33 @@ export function getElementIcon(element: string | number): string | null {
  */
 export function formatSpecialty(specialty: string | number): string {
   if (typeof specialty === "number") {
-    return SPECIALTY_MAP[specialty] || "Unknown";
+    return SPECIALTY_MAP[specialty]?.name || "Unknown";
   }
   return specialty;
+}
+
+/**
+ * Get specialty icon URL
+ */
+export function getSpecialtyIcon(specialty: string | number): string | null {
+  if (typeof specialty === "number") {
+    return SPECIALTY_MAP[specialty]?.icon || null;
+  }
+  const specialtyLower = specialty.toLowerCase();
+  switch (specialtyLower) {
+    case "attack":
+      return "/attack.webp";
+    case "stun":
+      return "/stun.webp";
+    case "anomaly":
+      return "/anomaly.webp";
+    case "support":
+      return "/support.webp";
+    case "defense":
+      return "/defense.webp";
+    case "rupture":
+      return "/rupture.webp";
+    default:
+      return null;
+  }
 }

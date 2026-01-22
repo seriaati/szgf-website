@@ -92,6 +92,12 @@
 }
 
 /* Guide content styles */
+.guide-content {
+  @apply break-words;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
 .guide-content .inline-icon {
   @apply inline-block h-5 w-5 align-middle mx-0.5;
 }

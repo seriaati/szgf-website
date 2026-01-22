@@ -10,7 +10,7 @@ import {
   getGuidesSortedByLastUpdated,
   searchGuides,
 } from "@/services/guideService";
-import { formatDate, getRarityColor, formatRarity, formatElement, formatSpecialty, getElementIcon, getElementColor } from "@/lib/guideParser";
+import { formatDate, getRarityColor, formatRarity, formatElement, formatSpecialty, getElementIcon, getElementColor, getSpecialtyIcon } from "@/lib/guideParser";
 
 const Guides = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -144,7 +144,14 @@ const Guides = () => {
                               )}
                               {formatElement(guide.character.element)}
                             </span>
-                            <span className="rounded-full bg-white/10 px-2 py-0.5 text-xs">
+                            <span className="flex items-center gap-1 rounded-full bg-white/10 px-2 py-0.5 text-xs">
+                              {getSpecialtyIcon(guide.character.specialty) && (
+                                <img
+                                  src={getSpecialtyIcon(guide.character.specialty)!}
+                                  alt=""
+                                  className="w-3 h-3"
+                                />
+                              )}
                               {formatSpecialty(guide.character.specialty)}
                             </span>
                           </div>

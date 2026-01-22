@@ -15,6 +15,7 @@ import {
   formatElement,
   formatSpecialty,
   getElementIcon,
+  getSpecialtyIcon,
   PLACEHOLDER_WENGINE_ICON,
 } from "@/lib/guideParser";
 
@@ -177,7 +178,14 @@ const GuideDetail = () => {
                           )}
                           {formatElement(guide.character.element)}
                         </span>
-                        <span className="rounded-full bg-white/10 px-3 py-1 text-sm">
+                        <span className="flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-sm">
+                          {getSpecialtyIcon(guide.character.specialty) && (
+                            <img
+                              src={getSpecialtyIcon(guide.character.specialty)!}
+                              alt=""
+                              className="w-4 h-4"
+                            />
+                          )}
                           {formatSpecialty(guide.character.specialty)}
                         </span>
                       </div>
