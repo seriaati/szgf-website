@@ -1,7 +1,8 @@
-import { ArrowRight, Terminal, Clock } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
 import sdks from "@/data/sdks.json";
+import { getSDKIcon } from "@/utils/sdkIcons";
 
 const SDKPreview = () => {
   return (
@@ -19,7 +20,7 @@ const SDKPreview = () => {
                   <div className="mb-3 flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="flex h-10 w-10 items-center justify-center rounded-md bg-secondary">
-                        <Terminal className="h-5 w-5 text-foreground" />
+                        {getSDKIcon(sdk.id)}
                       </div>
                       <span className="font-semibold">{sdk.name}</span>
                     </div>
