@@ -1,6 +1,5 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import PageMeta from "@/components/PageMeta";
 import { ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import applications from "@/data/applications.json";
@@ -8,11 +7,6 @@ import applications from "@/data/applications.json";
 const Applications = () => {
   return (
     <div className="min-h-screen bg-background">
-      <PageMeta
-        title="Applications - SZGF"
-        description="Projects and tools that integrate with SZGF"
-        path="/applications"
-      />
       <Header />
       <main className="pt-32 pb-20">
         <div className="container px-6">

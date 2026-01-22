@@ -1,6 +1,5 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import PageMeta from "@/components/PageMeta";
 import { Plus, RefreshCw, Trash2 } from "lucide-react";
 import changelog from "@/data/changelog.json";
 
@@ -33,11 +32,6 @@ const getColor = (type: string) => {
 const Changelog = () => {
   return (
     <div className="min-h-screen bg-background">
-      <PageMeta
-        title="Changelog - SZGF"
-        description="Track the evolution of the SZGF standard"
-        path="/changelog"
-      />
       <Header />
       <main className="pt-32 pb-20">
         <div className="container px-6">

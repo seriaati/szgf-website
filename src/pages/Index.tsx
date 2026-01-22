@@ -6,16 +6,10 @@ import GuidesPreview from "@/components/GuidesPreview";
 import ApplicationsPreview from "@/components/ApplicationsPreview";
 import SDKPreview from "@/components/SDKPreview";
 import Footer from "@/components/Footer";
-import PageMeta from "@/components/PageMeta";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
-      <PageMeta
-        title="SZGF - Standardized Zenless Zone Zero Guide Format"
-        description="A YAML-based format for writing structured, validated, and easily parseable guides for agents in Zenless Zone Zero."
-        path="/"
-      />
       <Header />
       <main>
         <Hero />

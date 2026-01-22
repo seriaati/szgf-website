@@ -2,7 +2,6 @@ import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import PageMeta from "@/components/PageMeta";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { ArrowLeft, Calendar, User } from "lucide-react";
@@ -123,12 +122,6 @@ const GuideDetail = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <PageMeta
-        title={`${guide.character.name} Guide - SZGF`}
-        description={`Complete guide for ${guide.character.name} in Zenless Zone Zero. ${formatElement(guide.character.element)} ${formatSpecialty(guide.character.specialty)} character.`}
-        path={`/guides/${characterId}`}
-        image={guide.character.banner}
-      />
       <Header />
       <main className="pt-32 pb-20">
         <div className="container px-6">

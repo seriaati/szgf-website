@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import PageMeta from "@/components/PageMeta";
 import { Input } from "@/components/ui/input";
 import { Search, Calendar, User } from "lucide-react";
 import {
@@ -30,11 +29,6 @@ const Guides = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <PageMeta
-        title="Character Guides - SZGF"
-        description="Character guides for Zenless Zone Zero written in SZGF format"
-        path="/guides"
-      />
       <Header />
       <main className="pt-32 pb-20">
         <div className="container px-6">
