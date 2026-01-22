@@ -477,14 +477,9 @@ const GuideDetail = () => {
                     <div className="space-y-4">
                       {guide.mindscapes.map((mindscape, index) => (
                         <div key={index} className="glass p-4">
-                          <div className="flex items-center gap-3 mb-2">
-                            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/20 text-sm font-bold text-primary">
-                              M{mindscape.num || index + 1}
-                            </span>
-                            <h3 className="font-semibold">
-                              Mindscape {mindscape.num || index + 1}
-                            </h3>
-                          </div>
+                          <h3 className="font-semibold mb-2">
+                            Mindscape {mindscape.num || index + 1}
+                          </h3>
                           {mindscape.description && (
                             <div
                               className="text-sm text-muted-foreground guide-content"
