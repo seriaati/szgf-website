@@ -1,0 +1,549 @@
+{
+  "$defs": {
+    "Character": {
+      "description": "A character in ZZZ.",
+      "properties": {
+        "name": {
+          "description": "Name of the character",
+          "title": "Name",
+          "type": "string"
+        },
+        "rarity": {
+          "description": "Rarity of the character, either 4 (A-rank) or 5 (S-rank) stars.",
+          "enum": [
+            4,
+            5
+          ],
+          "title": "Rarity",
+          "type": "integer"
+        },
+        "banner": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Banner image for the character",
+          "title": "Banner"
+        }
+      },
+      "required": [
+        "name",
+        "rarity"
+      ],
+      "title": "Character",
+      "type": "object"
+    },
+    "DiscMainStatSection": {
+      "description": "Main stat section for a drive disc.",
+      "properties": {
+        "stat_priority": {
+          "description": "Priority of the main stat for this position's disc, e.g. 'ATK > CRIT DMG > CRIT RATE'.",
+          "title": "Stat Priority",
+          "type": "string"
+        },
+        "pos": {
+          "description": "Position of the disc, either 4, 5, or 6.",
+          "enum": [
+            4,
+            5,
+            6
+          ],
+          "title": "Pos",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "stat_priority",
+        "pos"
+      ],
+      "title": "DiscMainStatSection",
+      "type": "object"
+    },
+    "DiscSection": {
+      "description": "A drive disc section for a character.",
+      "properties": {
+        "four_pieces": {
+          "description": "List of four-piece disc sets.",
+          "items": {
+            "$ref": "#/$defs/DiscSetSection"
+          },
+          "title": "Four Pieces",
+          "type": "array"
+        },
+        "two_pieces": {
+          "description": "List of two-piece disc sets.",
+          "items": {
+            "$ref": "#/$defs/DiscSetSection"
+          },
+          "title": "Two Pieces",
+          "type": "array"
+        },
+        "extra_sections": {
+          "description": "Additional sections that can be added to the disc section.",
+          "items": {
+            "$ref": "#/$defs/Section"
+          },
+          "title": "Extra Sections",
+          "type": "array"
+        }
+      },
+      "required": [
+        "four_pieces",
+        "two_pieces"
+      ],
+      "title": "DiscSection",
+      "type": "object"
+    },
+    "DiscSetSection": {
+      "description": "A drive disc set section.",
+      "properties": {
+        "name": {
+          "description": "Name of the drive disc set",
+          "title": "Name",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description for this section",
+          "title": "Description",
+          "type": "string"
+        },
+        "icon": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Icon of the drive disc set. A custom icon can be provided, otherwise an icon will be fetched based on the name.",
+          "title": "Icon"
+        }
+      },
+      "required": [
+        "name",
+        "description"
+      ],
+      "title": "DiscSetSection",
+      "type": "object"
+    },
+    "MindscapeSection": {
+      "description": "A mindscape cinema section for a character.",
+      "properties": {
+        "num": {
+          "description": "Number of the mindscape, from 1 to 6.",
+          "enum": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "title": "Num",
+          "type": "integer"
+        },
+        "description": {
+          "description": "Description of the mindscape, explaining its effects and importance.",
+          "title": "Description",
+          "type": "string"
+        }
+      },
+      "required": [
+        "num",
+        "description"
+      ],
+      "title": "MindscapeSection",
+      "type": "object"
+    },
+    "Section": {
+      "description": "A section, anything can be written, like additional explanations.",
+      "properties": {
+        "title": {
+          "description": "Title of the section",
+          "title": "Title",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the section",
+          "title": "Description",
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "description"
+      ],
+      "title": "Section",
+      "type": "object"
+    },
+    "Skill": {
+      "description": "A skill of a character.",
+      "properties": {
+        "title": {
+          "description": "Title of the skill",
+          "title": "Title",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the skill",
+          "title": "Description",
+          "type": "string"
+        },
+        "explanation": {
+          "description": "Explanation of the skill mechanics",
+          "title": "Explanation",
+          "type": "string"
+        },
+        "demo": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Demo GIF of the skill",
+          "title": "Demo"
+        }
+      },
+      "required": [
+        "title",
+        "description",
+        "explanation"
+      ],
+      "title": "Skill",
+      "type": "object"
+    },
+    "SkillPrioritySection": {
+      "description": "Skill priority section for a character.",
+      "properties": {
+        "priorities": {
+          "description": "List of skill priorities, where each sublist represents a priority level. For example, [[core, basic], [special, dodge]] means the first priority is core and basic skills, and the second priority is special and dodge skills.",
+          "items": {
+            "items": {
+              "$ref": "#/$defs/SkillType"
+            },
+            "type": "array"
+          },
+          "title": "Priorities",
+          "type": "array"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Description of the skill priority section",
+          "title": "Description"
+        }
+      },
+      "required": [
+        "priorities"
+      ],
+      "title": "SkillPrioritySection",
+      "type": "object"
+    },
+    "SkillType": {
+      "description": "Types of skills in ZZZ.",
+      "enum": [
+        "core",
+        "basic",
+        "dodge",
+        "special",
+        "chain",
+        "assist"
+      ],
+      "title": "SkillType",
+      "type": "string"
+    },
+    "StatSection": {
+      "description": "Stat section for a character.",
+      "properties": {
+        "main_stats": {
+          "description": "List of main stats for each disc position (4, 5, 6).",
+          "items": {
+            "$ref": "#/$defs/DiscMainStatSection"
+          },
+          "title": "Main Stats",
+          "type": "array"
+        },
+        "sub_stats": {
+          "description": "Priority of sub stats for the character, e.g. 'ATK > CRIT DMG > CRIT RATE > SPD'.",
+          "title": "Sub Stats",
+          "type": "string"
+        },
+        "baseline_stats": {
+          "description": "Baseline stats for the character, e.g. 'ATK: 1000, DEF: 500, HP: 2000'.",
+          "title": "Baseline Stats",
+          "type": "string"
+        },
+        "extra_sections": {
+          "description": "Additional sections that can be added to the stat section.",
+          "items": {
+            "$ref": "#/$defs/Section"
+          },
+          "title": "Extra Sections",
+          "type": "array"
+        }
+      },
+      "required": [
+        "main_stats",
+        "sub_stats",
+        "baseline_stats"
+      ],
+      "title": "StatSection",
+      "type": "object"
+    },
+    "Team": {
+      "description": "A team that a character can be part of.",
+      "properties": {
+        "name": {
+          "description": "Name of the team",
+          "title": "Name",
+          "type": "string"
+        },
+        "characters": {
+          "description": "List of characters in the team",
+          "items": {
+            "$ref": "#/$defs/TeamMember"
+          },
+          "title": "Characters",
+          "type": "array"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Description of the team",
+          "title": "Description"
+        }
+      },
+      "required": [
+        "name",
+        "characters"
+      ],
+      "title": "Team",
+      "type": "object"
+    },
+    "TeamMember": {
+      "description": "A team member in a team.",
+      "properties": {
+        "name": {
+          "description": "Name of the team member",
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "TeamMember",
+      "type": "object"
+    },
+    "TeamSection": {
+      "description": "Team section for a character.",
+      "properties": {
+        "teams": {
+          "description": "List of teams that the character can be part of.",
+          "items": {
+            "$ref": "#/$defs/Team"
+          },
+          "title": "Teams",
+          "type": "array"
+        },
+        "extra_sections": {
+          "description": "Additional sections for the team section.",
+          "items": {
+            "$ref": "#/$defs/Section"
+          },
+          "title": "Extra Sections",
+          "type": "array"
+        }
+      },
+      "title": "TeamSection",
+      "type": "object"
+    },
+    "WeaponSection": {
+      "description": "A weapon section for a character.",
+      "properties": {
+        "name": {
+          "description": "Name of the weapon",
+          "title": "Name",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the weapon",
+          "title": "Description",
+          "type": "string"
+        },
+        "title": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Title of the section. A custom title for the section can be provided, otherwise shows the ranking of the weapon, e.g. '2nd Best W-Engine.'",
+          "title": "Title"
+        },
+        "icon": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Icon of the weapon. A custom icon can be provided, otherwise an icon will be fetched based on the name.",
+          "title": "Icon"
+        }
+      },
+      "required": [
+        "name",
+        "description"
+      ],
+      "title": "WeaponSection",
+      "type": "object"
+    }
+  },
+  "description": "The standardized ZZZ guide format (SZGF) schema.",
+  "properties": {
+    "author": {
+      "description": "Author of the guide",
+      "title": "Author",
+      "type": "string"
+    },
+    "last_updated": {
+      "description": "Last updated date of the guide",
+      "format": "date",
+      "title": "Last Updated",
+      "type": "string"
+    },
+    "character": {
+      "$ref": "#/$defs/Character",
+      "description": "Character information"
+    },
+    "description": {
+      "description": "Description of the guide, explaining its purpose and content.",
+      "title": "Description",
+      "type": "string"
+    },
+    "weapons": {
+      "description": "List of weapon sections for the character.",
+      "items": {
+        "$ref": "#/$defs/WeaponSection"
+      },
+      "title": "Weapons",
+      "type": "array"
+    },
+    "discs": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/DiscSection"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Disc section for the character."
+    },
+    "stat": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/StatSection"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Stat section for the character."
+    },
+    "skill_priority": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/SkillPrioritySection"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Skill priority section for the character."
+    },
+    "skills": {
+      "description": "List of skills for the character.",
+      "items": {
+        "$ref": "#/$defs/Skill"
+      },
+      "title": "Skills",
+      "type": "array"
+    },
+    "mindscapes": {
+      "description": "List of mindscapes for the character.",
+      "items": {
+        "$ref": "#/$defs/MindscapeSection"
+      },
+      "title": "Mindscapes",
+      "type": "array"
+    },
+    "team": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/TeamSection"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Team section for the character."
+    },
+    "rotation": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Section"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Rotation section for the character, explaining how to use skills effectively."
+    }
+  },
+  "required": [
+    "author",
+    "last_updated",
+    "character",
+    "description"
+  ],
+  "title": "OriginalGuide",
+  "type": "object"
+}

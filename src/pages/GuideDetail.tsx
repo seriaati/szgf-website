@@ -14,7 +14,14 @@ import {
   formatRarity,
   formatElement,
   formatSpecialty,
+  getElementIcon,
+  PLACEHOLDER_WENGINE_ICON,
 } from "@/lib/guideParser";
+
+interface MainStatItem {
+  stat_priority: string;
+  pos: number;
+}
 
 const GuideDetail = () => {
   const { characterId } = useParams<{ characterId: string }>();
@@ -31,7 +38,7 @@ const GuideDetail = () => {
 
   const tocSections = [
     { id: "overview", label: "Overview" },
-    { id: "weapons", label: "Weapons" },
+    { id: "wengines", label: "W-Engines" },
     { id: "discs", label: "Drive Discs" },
     { id: "stats", label: "Stats" },
     { id: "skills", label: "Skills" },
@@ -94,6 +101,8 @@ const GuideDetail = () => {
     );
   }
 
+  const elementIcon = getElementIcon(guide.character.element);
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -136,11 +145,11 @@ const GuideDetail = () => {
                 {/* Header */}
                 <section id="overview" className="section-fade mb-12">
                   <div className="glass overflow-hidden">
-                    <div className="aspect-[21/9] overflow-hidden">
+                    <div className="aspect-[21/9] overflow-hidden bg-black/20">
                       <img
                         src={guide.character.banner}
                         alt={guide.character.name}
-                        className="h-full w-full object-cover"
+                        className="h-full w-full object-cover object-center"
                       />
                     </div>
                     <div className="p-6">
@@ -157,8 +166,15 @@ const GuideDetail = () => {
 
                       <div className="flex flex-wrap gap-3 mb-4">
                         <span
-                          className={`rounded-full bg-white/10 px-3 py-1 text-sm ${getElementColor(guide.character.element)}`}
+                          className={`flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-sm ${getElementColor(guide.character.element)}`}
                         >
+                          {elementIcon && (
+                            <img
+                              src={elementIcon}
+                              alt=""
+                              className="w-4 h-4"
+                            />
+                          )}
                           {formatElement(guide.character.element)}
                         </span>
                         <span className="rounded-full bg-white/10 px-3 py-1 text-sm">
@@ -189,21 +205,19 @@ const GuideDetail = () => {
                   </div>
                 </section>
 
-                {/* Weapons */}
+                {/* W-Engines */}
                 {guide.weapons && guide.weapons.length > 0 && (
-                  <section id="weapons" className="section-fade mb-12">
-                    <h2 className="text-2xl font-bold mb-6">Weapons</h2>
+                  <section id="wengines" className="section-fade mb-12">
+                    <h2 className="text-2xl font-bold mb-6">W-Engines</h2>
                     <div className="space-y-4">
                       {guide.weapons.map((weapon, index) => (
                         <div key={index} className="glass p-4">
                           <div className="flex items-start gap-4">
-                            {weapon.icon && (
-                              <img
-                                src={weapon.icon}
-                                alt={weapon.name}
-                                className="w-16 h-16 rounded-lg object-cover"
-                              />
-                            )}
+                            <img
+                              src={weapon.icon || PLACEHOLDER_WENGINE_ICON}
+                              alt={weapon.name}
+                              className="w-16 h-16 rounded-lg object-cover bg-white/5"
+                            />
                             <div className="flex-1">
                               <div className="flex items-center gap-2 mb-1">
                                 <h3 className="font-semibold">{weapon.name}</h3>
@@ -211,7 +225,7 @@ const GuideDetail = () => {
                                   <span
                                     className={`text-sm ${getRarityColor(weapon.rarity)}`}
                                   >
-                                    {weapon.rarity}
+                                    {formatRarity(weapon.rarity)}
                                   </span>
                                 )}
                               </div>
@@ -258,7 +272,7 @@ const GuideDetail = () => {
                                         className="w-12 h-12 rounded-lg object-cover"
                                       />
                                     )}
-                                    <div>
+                                    <div className="flex-1">
                                       <h4 className="font-semibold mb-1">
                                         {disc.name}
                                       </h4>
@@ -286,24 +300,24 @@ const GuideDetail = () => {
                             <h3 className="text-lg font-semibold mb-3 text-muted-foreground">
                               2-Piece Sets
                             </h3>
-                            <div className="grid gap-3 sm:grid-cols-2">
+                            <div className="space-y-3">
                               {guide.discs.two_pieces.map((disc, index) => (
                                 <div key={index} className="glass p-4">
-                                  <div className="flex items-start gap-3">
+                                  <div className="flex items-start gap-4">
                                     {disc.icon && (
                                       <img
                                         src={disc.icon}
                                         alt={disc.name}
-                                        className="w-10 h-10 rounded-lg object-cover"
+                                        className="w-12 h-12 rounded-lg object-cover"
                                       />
                                     )}
-                                    <div>
-                                      <h4 className="font-semibold text-sm mb-1">
+                                    <div className="flex-1">
+                                      <h4 className="font-semibold mb-1">
                                         {disc.name}
                                       </h4>
                                       {disc.description && (
                                         <div
-                                          className="text-xs text-muted-foreground guide-content"
+                                          className="text-sm text-muted-foreground guide-content"
                                           dangerouslySetInnerHTML={{
                                             __html: parseGuideText(
                                               disc.description
@@ -327,35 +341,37 @@ const GuideDetail = () => {
                   <section id="stats" className="section-fade mb-12">
                     <h2 className="text-2xl font-bold mb-6">Stats</h2>
                     <div className="glass p-6 space-y-6">
-                      {guide.stat.main_stats && (
-                        <div>
-                          <h3 className="text-lg font-semibold mb-3">
-                            Main Stats
-                          </h3>
-                          <div className="grid gap-3 sm:grid-cols-3">
-                            {Object.entries(guide.stat.main_stats).map(
-                              ([position, stats]) => (
-                                <div key={position} className="glass-subtle p-3">
-                                  <p className="text-sm font-medium text-muted-foreground mb-1">
-                                    {position}
-                                  </p>
-                                  <div
-                                    className="text-sm guide-content"
-                                    dangerouslySetInnerHTML={{
-                                      __html: parseGuideText(
-                                        Array.isArray(stats)
-                                          ? stats.join(", ")
-                                          : String(stats)
-                                      ),
-                                    }}
-                                  />
-                                </div>
-                              )
-                            )}
+                      {/* Drive Disc Main Stats */}
+                      {guide.stat.main_stats &&
+                        Array.isArray(guide.stat.main_stats) &&
+                        guide.stat.main_stats.length > 0 && (
+                          <div>
+                            <h3 className="text-lg font-semibold mb-3">
+                              Drive Disc Main Stats
+                            </h3>
+                            <div className="grid gap-3 sm:grid-cols-3">
+                              {(guide.stat.main_stats as MainStatItem[]).map(
+                                (stat, index) => (
+                                  <div key={index} className="glass-subtle p-3">
+                                    <p className="text-sm font-medium text-muted-foreground mb-1">
+                                      Slot {stat.pos}
+                                    </p>
+                                    <div
+                                      className="text-sm guide-content"
+                                      dangerouslySetInnerHTML={{
+                                        __html: parseGuideText(
+                                          stat.stat_priority
+                                        ),
+                                      }}
+                                    />
+                                  </div>
+                                )
+                              )}
+                            </div>
                           </div>
-                        </div>
-                      )}
+                        )}
 
+                      {/* Sub Stats */}
                       {guide.stat.sub_stats && (
                         <div>
                           <h3 className="text-lg font-semibold mb-3">
@@ -364,16 +380,30 @@ const GuideDetail = () => {
                           <div
                             className="text-sm guide-content"
                             dangerouslySetInnerHTML={{
+                              __html: parseGuideText(String(guide.stat.sub_stats)),
+                            }}
+                          />
+                        </div>
+                      )}
+
+                      {/* Baseline Stats */}
+                      {guide.stat.baseline_stats && (
+                        <div>
+                          <h3 className="text-lg font-semibold mb-3">
+                            Baseline Stats
+                          </h3>
+                          <div
+                            className="text-sm guide-content glass-subtle p-4"
+                            dangerouslySetInnerHTML={{
                               __html: parseGuideText(
-                                Array.isArray(guide.stat.sub_stats)
-                                  ? guide.stat.sub_stats.join(", ")
-                                  : String(guide.stat.sub_stats)
+                                String(guide.stat.baseline_stats)
                               ),
                             }}
                           />
                         </div>
                       )}
 
+                      {/* Extra Sections */}
                       {guide.stat.extra_sections &&
                         guide.stat.extra_sections.length > 0 && (
                           <div className="space-y-4">
@@ -481,21 +511,27 @@ const GuideDetail = () => {
                           )}
                           <div className="flex flex-wrap gap-3">
                             {team.characters &&
-                              team.characters.map((char, charIndex) => (
-                                <div
-                                  key={charIndex}
-                                  className="flex items-center gap-2 rounded-lg bg-white/5 px-3 py-2"
-                                >
-                                  {char.icon && (
-                                    <img
-                                      src={char.icon}
-                                      alt={char.name}
-                                      className="w-8 h-8 rounded-full object-cover"
-                                    />
-                                  )}
-                                  <span className="text-sm">{char.name}</span>
-                                </div>
-                              ))}
+                              team.characters.map((char, charIndex) => {
+                                // Handle icons array from new format
+                                const charIcon =
+                                  (char as { icons?: string[] }).icons?.[0] ||
+                                  (char as { icon?: string }).icon;
+                                return (
+                                  <div
+                                    key={charIndex}
+                                    className="flex items-center gap-2 rounded-lg bg-white/5 px-3 py-2"
+                                  >
+                                    {charIcon && (
+                                      <img
+                                        src={charIcon}
+                                        alt={char.name}
+                                        className="w-8 h-8 rounded-full object-cover"
+                                      />
+                                    )}
+                                    <span className="text-sm">{char.name}</span>
+                                  </div>
+                                );
+                              })}
                           </div>
                           {team.description && (
                             <div
@@ -508,6 +544,30 @@ const GuideDetail = () => {
                         </div>
                       ))}
                     </div>
+
+                    {/* Team Extra Sections */}
+                    {guide.team.extra_sections &&
+                      guide.team.extra_sections.length > 0 && (
+                        <div className="mt-6 space-y-4">
+                          {guide.team.extra_sections.map((section, index) => (
+                            <div key={index} className="glass p-4">
+                              {section.title && (
+                                <h4 className="font-semibold mb-2">
+                                  {section.title}
+                                </h4>
+                              )}
+                              {section.description && (
+                                <div
+                                  className="text-sm text-muted-foreground guide-content"
+                                  dangerouslySetInnerHTML={{
+                                    __html: parseGuideText(section.description),
+                                  }}
+                                />
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      )}
                   </section>
                 )}
               </div>

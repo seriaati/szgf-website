@@ -1,0 +1,208 @@
+{
+  "author": "Mercer",
+  "last_updated": "2025-06-25",
+  "character": {
+    "name": "Astra Yao",
+    "rarity": 5,
+    "banner": "https://api.hakush.in/zzz/UI/Mindscape_1311_3.webp",
+    "id": 1311,
+    "element": 205,
+    "specialty": 4
+  },
+  "description": "**Astra Yao** is an **S rank Agent** with the **Ether attribute** who belongs to the **Support Specialty** and who is part of the **Stars of Lyra faction**.",
+  "weapons": [
+    {
+      "name": "Elegant Vanity",
+      "description": "**Best in Slot in all situations**, provides Astra with **Energy Regeneration**, a **stacking 10% DMG Boost** for the whole team and a massive **30% <atk> ATK Main Stat** to help her with reaching her <core> **Core Passive Requirement**, but due to the strength of A Rank Support W-Engine's, this W-Engine is somewhat overkill and Astra can reach full potential without it.",
+      "title": null,
+      "icon": "https://api.hakush.in/zzz/UI/Weapon_S_1311.webp",
+      "id": 14131,
+      "rarity": "S",
+      "specialty": 4
+    },
+    {
+      "name": "Bashful Demon",
+      "description": "The best peforming A Rank W-Engine for Astra, providing a generous **3.2% Combat <atk> ATK% boost** that **stacks up to 4 times** at S5 while having a **ATK% Main Stat** to help out with Astra's <core> **Core Passive requirement** making it all around the best.",
+      "title": null,
+      "icon": "https://api.hakush.in/zzz/UI/Weapon_A_1131.webp",
+      "id": 13113,
+      "rarity": "A",
+      "specialty": 4
+    },
+    {
+      "name": "Kaboom the Cannon",
+      "description": "The 2nd best A Rank W-Engine for Astra, almost has the exact same passive bonuses as Bashful Demon but requires way more careful play to maximise it, requiring constant **Quick Assists** to keep its effect up, it also doesn't have access to a **ATK% Main Stat** making it harder to fulfill Astra's <core> **Core Passive requirement** but still a servicable option if you don't have Bashful Demon.",
+      "title": null,
+      "icon": "https://api.hakush.in/zzz/UI/Weapon_A_1151.webp",
+      "id": 13115,
+      "rarity": "A",
+      "specialty": 4
+    }
+  ],
+  "discs": {
+    "four_pieces": [
+      {
+        "name": "Astral Voice",
+        "description": "Astral Voice was simply made for Astra, she has no issue mainting its **Quick Assist** requirement, making her have full uptime on its **24% DMG Boost** at all times",
+        "icon": "https://raw.githubusercontent.com/seriaati/szgf/refs/heads/main/assets/drive_discs/single/32800.webp"
+      }
+    ],
+    "two_pieces": [
+      {
+        "name": "Swing Jazz",
+        "description": "Her best 2-Pc set, gives a very needed **20% <er> Energy Regen bonus** helping her **Quick Assist** more often",
+        "icon": "https://raw.githubusercontent.com/seriaati/szgf/refs/heads/main/assets/drive_discs/single/31600.webp"
+      },
+      {
+        "name": "Hormone Punk",
+        "description": "A potential option for people running Kaboom the Cannon that need more <atk> ATK% to reach Astra's <core> **Core Passive** requirement",
+        "icon": "https://raw.githubusercontent.com/seriaati/szgf/refs/heads/main/assets/drive_discs/single/31400.webp"
+      }
+    ],
+    "extra_sections": []
+  },
+  "stat": {
+    "main_stats": [
+      {
+        "stat_priority": "<atk> ATK%",
+        "pos": 4
+      },
+      {
+        "stat_priority": "<atk> ATK%",
+        "pos": 5
+      },
+      {
+        "stat_priority": "Enery Regen% / <atk> ATK%",
+        "pos": 6
+      }
+    ],
+    "sub_stats": "- For Crit based usage: ATK%/Flat ATK until Passive Cap > Crit Rate = Crit DMG > PEN - Fpr Anomaly based usage: ATK%/Flat ATK until Passive Cap > Anomaly Proficiency > PEN",
+    "baseline_stats": "<atk> ATK: 3429+ (34925 is the <atk> ATK cap for her Core Passive) <er> Energy Regen: 0%+ - 130%+ (Depends on W-Engine and Disk Main Stat choices)",
+    "extra_sections": [
+      {
+        "title": "Core Passive cap and Energy Regen",
+        "description": "Astra Yao needs **atleast 3429 BASE ATK** to fulfill her <core> **Core Passive** requirement, this should be your **highest priority**. After getting 3429 <atk> ATK you should focus on getting as much <er> Energy Regen as possible with Min/Maxing stats, the more ER% you have, the more **Quick Assists** you can trigger which will make your rotations easier with Astra on the team."
+      }
+    ]
+  },
+  "skill_priority": {
+    "priorities": [
+      [
+        "special"
+      ],
+      [
+        "chain"
+      ]
+    ],
+    "description": "Her <special> **EX Special** has the highest priority for upgrades due to **increasing everyone's DMG and Crit DMG** up to **20% and 25% respectively** while her <chain> **Ultimate** will simply provide **more healing** and more chip damage."
+  },
+  "skills": [
+    {
+      "title": "Special Attack: \"Windchimes & Oaths\" & Idyllic Cadenza",
+      "description": "### Press <special> to activate:\nQuickly move away, then release **Tremolo**, dealing <ether> Ether DMG, and enter the **Idyllic Cadenza** state. Hold <special> to **charge** during activation, **drawing enemies in**, and follow up with 1 to 4 **Tremolos** depending on the charge duration. A **Quick Assist** will be triggered when this skill hits an enemy.",
+      "explanation": "Astra's bread and butter Ability, 99.9% of the time you will use this skill once at the start of the fight and simply reap the benefits it provides for the rest of the fight for free.",
+      "demo": null
+    },
+    {
+      "title": "Ultimate: \"Fantasian Sonata\"",
+      "description": "### When Decibel Rating is at Maximum, press <chain> to activate:\nUse song to channel energy into a blast, dealing massive <ether> Ether DMG, and restoring **HP** to all squad members.\nAfter the skill, Astra Yao enters the **Idyllic Cadenza** state and the **next two Quick Assists** will be replaced by <chain> **Chain Attacks.**",
+      "explanation": "Astra's only other Ability you'll be using, mainly used during Burst Phases to give yourself more <chain> Chain Attack damage and healing.",
+      "demo": null
+    }
+  ],
+  "mindscapes": [
+    {
+      "num": 1,
+      "description": "Provides a stacking **All-Attribute RES** shred up to **18%** and **a free 1000 Decibel boost** while entering the field for the first time."
+    },
+    {
+      "num": 2,
+      "description": "Increases the buff gained from her **Core Passive by 400 ATK**, making the complete buff **1600 ATK** and providing some **extra damage** whenever anyone **Quick Assists**."
+    }
+  ],
+  "team": {
+    "teams": [
+      {
+        "name": "Team 1",
+        "characters": [
+          {
+            "name": "Miyabi",
+            "ids": [
+              1091
+            ],
+            "icons": [
+              "https://api.hakush.in/zzz/UI/IconRoleSelect13.webp"
+            ]
+          },
+          {
+            "name": "Yanagi / Burnice / Vivian",
+            "ids": [
+              1221,
+              1171,
+              1331
+            ],
+            "icons": [
+              "https://api.hakush.in/zzz/UI/IconRoleSelect31.webp",
+              "https://api.hakush.in/zzz/UI/IconRoleSelect32.webp",
+              "https://api.hakush.in/zzz/UI/IconRoleSelect41.webp"
+            ]
+          },
+          {
+            "name": "Astra Yao",
+            "ids": [
+              1311
+            ],
+            "icons": [
+              "https://api.hakush.in/zzz/UI/IconRoleSelect36.webp"
+            ]
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "Team 2",
+        "characters": [
+          {
+            "name": "Evelyn",
+            "ids": [
+              1321
+            ],
+            "icons": [
+              "https://api.hakush.in/zzz/UI/IconRoleSelect37.webp"
+            ]
+          },
+          {
+            "name": "Lighter / Trigger / Koleda",
+            "ids": [
+              1161,
+              1361,
+              1101
+            ],
+            "icons": [
+              "https://api.hakush.in/zzz/UI/IconRoleSelect26.webp",
+              "https://api.hakush.in/zzz/UI/IconRoleSelect39.webp",
+              "https://api.hakush.in/zzz/UI/IconRoleSelect14.webp"
+            ]
+          },
+          {
+            "name": "Astra Yao",
+            "ids": [
+              1311
+            ],
+            "icons": [
+              "https://api.hakush.in/zzz/UI/IconRoleSelect36.webp"
+            ]
+          }
+        ],
+        "description": null
+      }
+    ],
+    "extra_sections": [
+      {
+        "title": "General Notes on Team Building",
+        "description": "Astra Yao at this current time fits into every team, even teams that do not need <atk> ATK like Yixuan, fitting in Astra into any team will always be a damage gain somehow"
+      }
+    ]
+  },
+  "rotation": null
+}

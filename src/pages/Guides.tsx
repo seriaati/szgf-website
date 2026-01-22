@@ -10,7 +10,7 @@ import {
   getGuidesSortedByLastUpdated,
   searchGuides,
 } from "@/services/guideService";
-import { formatDate, getRarityColor, formatRarity, formatElement, formatSpecialty } from "@/lib/guideParser";
+import { formatDate, getRarityColor, formatRarity, formatElement, formatSpecialty, getElementIcon, getElementColor } from "@/lib/guideParser";
 
 const Guides = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -101,11 +101,11 @@ const Guides = () => {
                         style={{ animationDelay: `${index * 50}ms` }}
                       >
                         {/* Banner */}
-                        <div className="aspect-[16/9] overflow-hidden">
+                        <div className="aspect-[16/9] overflow-hidden bg-black/20">
                           <img
                             src={guide.character.banner}
                             alt={guide.character.name}
-                            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                            className="h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
                           />
                         </div>
 
@@ -134,7 +134,14 @@ const Guides = () => {
                           </div>
 
                           <div className="mt-3 flex gap-2">
-                            <span className="rounded-full bg-white/10 px-2 py-0.5 text-xs">
+                            <span className={`flex items-center gap-1 rounded-full bg-white/10 px-2 py-0.5 text-xs ${getElementColor(guide.character.element)}`}>
+                              {getElementIcon(guide.character.element) && (
+                                <img
+                                  src={getElementIcon(guide.character.element)!}
+                                  alt=""
+                                  className="w-3 h-3"
+                                />
+                              )}
                               {formatElement(guide.character.element)}
                             </span>
                             <span className="rounded-full bg-white/10 px-2 py-0.5 text-xs">

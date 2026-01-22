@@ -1,4 +1,5 @@
 const ICON_MAP: Record<string, string> = {
+  // Stat icons
   ice: "/icons/ice.webp",
   aaa: "/icons/aaa.webp",
   pr: "/icons/pr.webp",
@@ -16,7 +17,18 @@ const ICON_MAP: Record<string, string> = {
   atk: "/icons/atk.webp",
   ap: "/icons/ap.webp",
   am: "/icons/am.webp",
+  // Skill type icons
+  core: "/icons/core.webp",
+  assist: "/icons/assist.webp",
+  basic: "/icons/basic.webp",
+  dodge: "/icons/dodge.webp",
+  special: "/icons/special.webp",
+  chain: "/icons/chain.webp",
 };
+
+// Placeholder image for missing W-Engine icons (simple gray square as data URI)
+export const PLACEHOLDER_WENGINE_ICON =
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Crect fill='%23374151' width='64' height='64' rx='8'/%3E%3Ctext x='32' y='36' text-anchor='middle' fill='%239CA3AF' font-size='12' font-family='sans-serif'%3ENo Icon%3C/text%3E%3C/svg%3E";
 
 /**
  * Parse guide text with icon tags, markdown formatting
@@ -102,12 +114,12 @@ export function formatRarity(rarity: string | number): string {
 }
 
 // Element IDs from ZZZ game data
-const ELEMENT_MAP: Record<number, { name: string; color: string }> = {
-  200: { name: "Physical", color: "text-gray-400" },
-  201: { name: "Fire", color: "text-orange-400" },
-  202: { name: "Ice", color: "text-cyan-400" },
-  203: { name: "Electric", color: "text-yellow-400" },
-  205: { name: "Ether", color: "text-pink-400" },
+const ELEMENT_MAP: Record<number, { name: string; color: string; icon: string }> = {
+  200: { name: "Physical", color: "text-gray-400", icon: "/icons/physical.webp" },
+  201: { name: "Fire", color: "text-orange-400", icon: "/icons/fire.webp" },
+  202: { name: "Ice", color: "text-cyan-400", icon: "/icons/ice.webp" },
+  203: { name: "Electric", color: "text-yellow-400", icon: "/icons/elec.webp" },
+  205: { name: "Ether", color: "text-pink-400", icon: "/icons/ether.webp" },
 };
 
 // Specialty IDs from ZZZ game data
@@ -152,6 +164,31 @@ export function formatElement(element: string | number): string {
     return ELEMENT_MAP[element]?.name || "Unknown";
   }
   return element;
+}
+
+/**
+ * Get element icon URL
+ */
+export function getElementIcon(element: string | number): string | null {
+  if (typeof element === "number") {
+    return ELEMENT_MAP[element]?.icon || null;
+  }
+  const elementLower = element.toLowerCase();
+  switch (elementLower) {
+    case "fire":
+      return "/icons/fire.webp";
+    case "ice":
+      return "/icons/ice.webp";
+    case "electric":
+    case "elec":
+      return "/icons/elec.webp";
+    case "ether":
+      return "/icons/ether.webp";
+    case "physical":
+      return "/icons/physical.webp";
+    default:
+      return null;
+  }
 }
 
 /**
