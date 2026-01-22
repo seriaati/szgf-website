@@ -118,7 +118,7 @@ const ELEMENT_MAP: Record<number, { name: string; color: string; icon: string }>
   200: { name: "Physical", color: "text-gray-400", icon: "/icons/physical.webp" },
   201: { name: "Fire", color: "text-orange-400", icon: "/icons/fire.webp" },
   202: { name: "Ice", color: "text-cyan-400", icon: "/icons/ice.webp" },
-  203: { name: "Electric", color: "text-yellow-400", icon: "/icons/elec.webp" },
+  203: { name: "Electric", color: "text-electric", icon: "/icons/elec.webp" },
   205: { name: "Ether", color: "text-pink-400", icon: "/icons/ether.webp" },
 };
 
@@ -147,7 +147,7 @@ export function getElementColor(element: string | number): string {
       return "text-cyan-400";
     case "electric":
     case "elec":
-      return "text-yellow-400";
+      return "text-electric";
     case "ether":
       return "text-pink-400";
     case "physical":
