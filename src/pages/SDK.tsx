@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import PageMeta from "@/components/PageMeta";
 import { Clock, ExternalLink, Copy, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -17,6 +18,11 @@ const SDK = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageMeta
+        title="SDK - SZGF"
+        description="Integrate SZGF into your projects programmatically"
+        path="/sdk"
+      />
       <Header />
       <main className="pt-32 pb-20">
         <div className="container px-6">
