@@ -23,18 +23,7 @@ const SDKPreview = () => {
                       </div>
                       <span className="font-semibold">{sdk.name}</span>
                     </div>
-                    {sdk.status === "available" ? (
-                      <span className="rounded-full bg-secondary px-3 py-1 text-xs font-medium text-foreground">
-                        Available
-                      </span>
-                    ) : (
-                      <span className="flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1 text-xs font-medium text-muted-foreground">
-                        <Clock className="h-3 w-3" />
-                        Coming Soon
-                      </span>
-                    )}
                   </div>
-                  <p className="text-sm text-muted-foreground">{sdk.description}</p>
                   {sdk.installCommand && (
                     <code className="mt-3 block rounded-md bg-secondary px-4 py-2 text-sm text-foreground font-mono">
                       {sdk.installCommand}
@@ -53,7 +42,7 @@ const SDKPreview = () => {
               Integrate SZGF
             </h2>
             <p className="mb-8 text-muted-foreground">
-              Use our SDKs to programmatically fetch, validate, and parse SZGF guides 
+              Use SDKs to programmatically download and read SZGF guides
               in your own applications.
             </p>
             <Link to="/sdk">
