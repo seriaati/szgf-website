@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { ArrowLeft, Calendar, User } from "lucide-react";
-import { fetchGuide } from "@/services/guideService";
+import { fetchGuide, fetchGuides } from "@/services/guideService";
 import {
   parseGuideText,
   formatDate,
@@ -35,6 +35,12 @@ const GuideDetail = () => {
     queryKey: ["guide", characterId],
     queryFn: () => fetchGuide(characterId!),
     enabled: !!characterId,
+  });
+
+  // Fetch all guides to check which characters have guides
+  const { data: allGuides } = useQuery({
+    queryKey: ["guides"],
+    queryFn: fetchGuides,
   });
 
   const tocSections = [
@@ -104,6 +110,15 @@ const GuideDetail = () => {
   }
 
   const elementIcon = getElementIcon(guide.character.element);
+
+  // Helper function to find character ID by name
+  const getCharacterIdByName = (name: string): string | null => {
+    if (!allGuides) return null;
+    const guideEntry = Object.entries(allGuides).find(
+      ([_, g]) => g.character.name.toLowerCase() === name.toLowerCase()
+    );
+    return guideEntry ? guideEntry[0] : null;
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -225,7 +240,7 @@ const GuideDetail = () => {
                             <img
                               src={weapon.icon || PLACEHOLDER_WENGINE_ICON}
                               alt={weapon.name}
-                              className="w-16 h-16 rounded-lg object-cover bg-white/5"
+                              className="w-16 h-16 rounded-lg object-cover"
                             />
                             <div className="flex-1">
                               <div className="flex items-center gap-2 mb-1">
@@ -534,22 +549,56 @@ const GuideDetail = () => {
                             {team.characters &&
                               team.characters.map((char, charIndex) => {
                                 // Handle icons array from new format
-                                const charIcon =
-                                  (char as { icons?: string[] }).icons?.[0] ||
-                                  (char as { icon?: string }).icon;
+                                const charIcons =
+                                  (char as { icons?: string[] }).icons ||
+                                  ((char as { icon?: string }).icon
+                                    ? [(char as { icon?: string }).icon!]
+                                    : []);
+
+                                // Split character names by " / " to handle multiple options
+                                const characterNames = char.name.split(" / ").map((name: string) => name.trim());
+
                                 return (
                                   <div
                                     key={charIndex}
                                     className="flex items-center gap-2 rounded-lg bg-white/5 px-3 py-2"
                                   >
-                                    {charIcon && (
-                                      <img
-                                        src={charIcon}
-                                        alt={char.name}
-                                        className="w-8 h-8 rounded-full object-cover"
-                                      />
+                                    {charIcons.length > 0 && (
+                                      <div className="flex -space-x-2">
+                                        {charIcons.map((icon, iconIndex) => (
+                                          <img
+                                            key={iconIndex}
+                                            src={icon}
+                                            alt={char.name}
+                                            className="w-8 h-8 rounded-full object-cover border-2 border-white/10"
+                                          />
+                                        ))}
+                                      </div>
                                     )}
-                                    <span className="text-sm">{char.name}</span>
+                                    <span className="text-sm">
+                                      {characterNames.map((name: string, nameIndex: number) => {
+                                        const characterGuideId = getCharacterIdByName(name);
+                                        const hasGuide = characterGuideId !== null;
+
+                                        return (
+                                          <span key={nameIndex}>
+                                            {hasGuide ? (
+                                              <Link
+                                                to={`/guides/${characterGuideId}`}
+                                                className="text-primary hover:underline"
+                                              >
+                                                {name}
+                                              </Link>
+                                            ) : (
+                                              <span>{name}</span>
+                                            )}
+                                            {nameIndex < characterNames.length - 1 && (
+                                              <span className="text-muted-foreground"> / </span>
+                                            )}
+                                          </span>
+                                        );
+                                      })}
+                                    </span>
                                   </div>
                                 );
                               })}
