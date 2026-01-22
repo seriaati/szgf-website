@@ -7,6 +7,8 @@ import Index from "./pages/Index";
 import Changelog from "./pages/Changelog";
 import Applications from "./pages/Applications";
 import SDK from "./pages/SDK";
+import Guides from "./pages/Guides";
+import GuideDetail from "./pages/GuideDetail";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +24,8 @@ const App = () => (
           <Route path="/changelog" element={<Changelog />} />
           <Route path="/applications" element={<Applications />} />
           <Route path="/sdk" element={<SDK />} />
+          <Route path="/guides" element={<Guides />} />
+          <Route path="/guides/:characterId" element={<GuideDetail />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

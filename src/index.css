@@ -90,3 +90,42 @@
     animation-delay: 600ms;
   }
 }
+
+/* Guide content styles */
+.guide-content {
+  @apply break-words;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.guide-content .inline-icon {
+  @apply inline-block h-5 w-5 align-middle mx-0.5;
+}
+
+.guide-content strong {
+  @apply font-semibold text-foreground;
+}
+
+.guide-content em {
+  @apply italic;
+}
+
+.guide-content del {
+  @apply line-through opacity-70;
+}
+
+.guide-content u {
+  @apply underline decoration-primary/50;
+}
+
+.glass {
+  @apply bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl;
+}
+
+.glass-subtle {
+  @apply bg-white/[0.02] border border-white/5 rounded-xl;
+}
+
+.gradient-text {
+  @apply bg-gradient-to-r from-white to-white/70 bg-clip-text text-transparent;
+}
