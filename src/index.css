@@ -99,7 +99,7 @@
 }
 
 .guide-content .inline-icon {
-  @apply inline-block h-5 w-5 align-middle mx-0.5;
+  @apply inline-block h-3.5 w-3.5 align-middle mx-0.5;
 }
 
 .guide-content strong {
