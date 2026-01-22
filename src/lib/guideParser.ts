@@ -32,7 +32,7 @@ export const PLACEHOLDER_WENGINE_ICON =
 
 /**
  * Parse guide text with icon tags, markdown formatting
- * Supports: <icon>, **bold**, *italic*, ~~strikethrough~~, __underline__
+ * Supports: <icon>, **bold**, *italic*, ~~strikethrough~~, __underline__, ### headings
  */
 export function parseGuideText(text: string): string {
   if (!text) return "";
@@ -47,6 +47,9 @@ export function parseGuideText(text: string): string {
     }
     return match;
   });
+
+  // Headings: ### text -> <h3>text</h3>
+  result = result.replace(/^### (.+)$/gm, "<h3 class='text-base font-semibold mb-2 mt-3'>$1</h3>");
 
   // Bold: **text** -> <strong>text</strong>
   result = result.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
