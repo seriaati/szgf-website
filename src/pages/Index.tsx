@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Features from "@/components/Features";
 import ChangelogPreview from "@/components/ChangelogPreview";
+import GuidesPreview from "@/components/GuidesPreview";
 import ApplicationsPreview from "@/components/ApplicationsPreview";
 import SDKPreview from "@/components/SDKPreview";
 import Footer from "@/components/Footer";
@@ -14,6 +15,7 @@ const Index = () => {
         <Hero />
         <Features />
         <ChangelogPreview />
+        <GuidesPreview />
         <ApplicationsPreview />
         <SDKPreview />
       </main>
