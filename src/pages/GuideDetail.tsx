@@ -43,6 +43,7 @@ const GuideDetail = () => {
     { id: "discs", label: "Drive Discs" },
     { id: "stats", label: "Stats" },
     { id: "skills", label: "Skills" },
+    { id: "rotation", label: "Rotation" },
     { id: "mindscapes", label: "Mindscapes" },
     { id: "teams", label: "Teams" },
   ];
@@ -466,6 +467,23 @@ const GuideDetail = () => {
                           )}
                         </div>
                       ))}
+                    </div>
+                  </section>
+                )}
+
+                {/* Rotation */}
+                {guide.rotation && (
+                  <section id="rotation" className="section-fade mb-12">
+                    <h2 className="text-2xl font-bold mb-6">
+                      {guide.rotation.title || "Rotation"}
+                    </h2>
+                    <div className="glass p-6">
+                      <div
+                        className="text-sm guide-content"
+                        dangerouslySetInnerHTML={{
+                          __html: parseGuideText(guide.rotation.description),
+                        }}
+                      />
                     </div>
                   </section>
                 )}
