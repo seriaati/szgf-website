@@ -17,7 +17,7 @@ const ApplicationsPreview = () => {
             Built with SZGF
           </h2>
           <p className="mx-auto max-w-2xl text-muted-foreground">
-            Applications that integrate SZGF to bring guides to life
+            Applications that integrate SZGF
           </p>
         </div>
 

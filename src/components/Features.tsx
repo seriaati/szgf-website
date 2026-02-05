@@ -4,13 +4,13 @@ const features = [
   {
     icon: FileCheck,
     title: "Standardized Format",
-    description: "YAML-based structure ensures consistency across all guides, making them easy to read, write, and maintain.",
+    description: "All guides follow the same structure, making them easy to integrate.",
     color: "text-blue-500",
   },
   {
     icon: Code2,
-    title: "Schema Validation",
-    description: "Built-in JSON schema validates your guides automatically, catching errors before they become problems.",
+    title: "Parsed Format",
+    description: "Automatically parsed to include item ID, icons, stat tags, and more.",
     color: "text-amber-500",
   },
   {
@@ -22,7 +22,7 @@ const features = [
   {
     icon: Github,
     title: "Open Source",
-    description: "Fully open source and community-driven. Contribute guides, improve the schema, or build your own tools.",
+    description: "Fully open source and community-driven.",
     color: "text-emerald-500",
   },
 ];
@@ -36,7 +36,7 @@ const Features = () => {
             Why <span className="text-primary">SZGF</span>?
           </h2>
           <p className="mx-auto max-w-2xl text-muted-foreground">
-            A modern approach to game guide documentation
+            Some cool features
           </p>
         </div>
 

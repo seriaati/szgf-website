@@ -40,7 +40,7 @@ const Changelog = () => {
               <span className="gradient-text">Changelog</span>
             </h1>
             <p className="mb-12 text-lg text-muted-foreground">
-              Track the evolution of the SZGF standard
+              Track the historical changes of SZGF
             </p>
 
             <div className="relative space-y-8">

@@ -21,8 +21,7 @@ const Hero = () => {
 
           {/* Description */}
           <p className="mx-auto mb-10 max-w-2xl text-lg text-muted-foreground leading-relaxed sm:text-xl">
-            A YAML-based format for writing structured, validated, and easily parseable
-            guides for agents in Zenless Zone Zero.
+            A YAML-based format for writing agent guides in Zenless Zone Zero.
           </p>
 
           {/* CTA Buttons */}
