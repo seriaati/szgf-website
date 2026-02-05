@@ -16,7 +16,7 @@ const features = [
   {
     icon: Sparkles,
     title: "Easy to Write",
-    description: "Use the SZGF Generator, no technical knowledge required. The tool creates valid YAML for you.",
+    description: "Use the SZGF Generator, no technical knowledge required.",
     color: "text-purple-500",
   },
   {
