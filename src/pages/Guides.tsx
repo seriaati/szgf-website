@@ -22,6 +22,7 @@ const Guides = () => {
   } = useQuery({
     queryKey: ["guides"],
     queryFn: fetchGuides,
+    staleTime: 5 * 60 * 1000,
   });
 
   const sortedGuides = guidesMap ? getGuidesSortedByLastUpdated(guidesMap) : [];

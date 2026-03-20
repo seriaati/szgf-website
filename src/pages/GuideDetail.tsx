@@ -35,12 +35,14 @@ const GuideDetail = () => {
     queryKey: ["guide", characterId],
     queryFn: () => fetchGuide(characterId!),
     enabled: !!characterId,
+    staleTime: 5 * 60 * 1000,
   });
 
   // Fetch all guides to check which characters have guides
   const { data: allGuides } = useQuery({
     queryKey: ["guides"],
     queryFn: fetchGuides,
+    staleTime: 5 * 60 * 1000,
   });
 
   const tocSections = [

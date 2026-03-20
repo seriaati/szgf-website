@@ -1,3 +1,5 @@
+import DOMPurify from "dompurify";
+
 const ICON_MAP: Record<string, string> = {
   // Stat icons
   ice: "/icons/ice.webp",
@@ -66,7 +68,11 @@ export function parseGuideText(text: string): string {
   // Line breaks: \n -> <br />
   result = result.replace(/\n/g, "<br />");
 
-  return result;
+  // Sanitize the final HTML before returning
+  return DOMPurify.sanitize(result, {
+    ALLOWED_TAGS: ["img", "strong", "em", "del", "u", "h3", "br"],
+    ALLOWED_ATTR: ["src", "alt", "class"],
+  });
 }
 
 /**

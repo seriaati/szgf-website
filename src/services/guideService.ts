@@ -12,17 +12,7 @@ interface GithubContentItem {
   download_url: string;
 }
 
-let guidesCache: Record<string, ParsedGuideWithId> | null = null;
-let lastFetchTime: number | null = null;
-const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
-
 export async function fetchGuides(): Promise<Record<string, ParsedGuideWithId>> {
-  const now = Date.now();
-
-  if (guidesCache && lastFetchTime && now - lastFetchTime < CACHE_DURATION) {
-    return guidesCache;
-  }
-
   // Fetch list of guide files from GitHub API
   const listResponse = await fetch(GITHUB_API_URL);
   if (!listResponse.ok) {
@@ -54,9 +44,6 @@ export async function fetchGuides(): Promise<Record<string, ParsedGuideWithId>> 
       guidesMap[guide.character.id] = guide;
     }
   }
-
-  guidesCache = guidesMap;
-  lastFetchTime = now;
 
   return guidesMap;
 }
