@@ -6,12 +6,6 @@ const Hero = () => {
     <section className="relative min-h-screen flex items-center justify-center pt-24">
       <div className="container relative z-10 px-6 text-center">
         <div className="section-fade mx-auto max-w-4xl">
-          {/* Badge */}
-          <div className="mb-8 inline-flex items-center gap-2 bg-secondary border border-border px-4 py-2 rounded-full text-sm">
-            <span className="h-2 w-2 rounded-full bg-emerald-500" />
-            <span className="text-muted-foreground">Open Source</span>
-          </div>
-
           {/* Main heading */}
           <h1 className="mb-6 text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
             <span className="text-foreground">Standardized</span>
