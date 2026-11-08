@@ -141,7 +141,7 @@ const GuideDetail = ({ guide, allGuides }: GuideDetailProps) => {
 
                     {guide.description && (
                       <div
-                        className="prose prose-invert max-w-none guide-content"
+                        className="guide-content"
                         dangerouslySetInnerHTML={{
                           __html: parseGuideText(guide.description),
                         }}
