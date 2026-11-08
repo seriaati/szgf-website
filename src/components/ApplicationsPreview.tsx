@@ -1,5 +1,4 @@
 import { ArrowRight, ExternalLink } from "lucide-react";
-import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
 import applications from "@/data/applications.json";
 
@@ -50,12 +49,12 @@ const ApplicationsPreview = () => {
                     <ExternalLink className="h-4 w-4" />
                   </Button>
                 </a>
-                <Link to="/applications">
+                <a href="/applications">
                   <Button variant="outline" className="group">
                     View All Applications
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </Button>
-                </Link>
+                </a>
               </div>
             </div>
           </div>

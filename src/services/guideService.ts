@@ -12,9 +12,20 @@ interface GithubContentItem {
   download_url: string;
 }
 
-export async function fetchGuides(): Promise<Record<string, ParsedGuideWithId>> {
-  // Fetch list of guide files from GitHub API
-  const listResponse = await fetch(GITHUB_API_URL);
+let guidesPromise: Promise<Record<string, ParsedGuideWithId>> | null = null;
+
+// Called once per build; every page shares the same result.
+export function fetchGuides(): Promise<Record<string, ParsedGuideWithId>> {
+  guidesPromise ??= loadGuides();
+  return guidesPromise;
+}
+
+async function loadGuides(): Promise<Record<string, ParsedGuideWithId>> {
+  // Unauthenticated GitHub API calls are limited to 60/hour per IP, which shared build machines can hit.
+  const token = import.meta.env.GITHUB_TOKEN;
+  const listResponse = await fetch(GITHUB_API_URL, {
+    headers: token ? { Authorization: `Bearer ${token}` } : {},
+  });
   if (!listResponse.ok) {
     throw new Error(`Failed to fetch guide list: ${listResponse.statusText}`);
   }
@@ -24,35 +35,25 @@ export async function fetchGuides(): Promise<Record<string, ParsedGuideWithId>> 
     (f) => f.type === "file" && f.name.endsWith(".json")
   );
 
-  // Fetch all guide files in parallel
-  const guidePromises = jsonFiles.map(async (file) => {
-    const response = await fetch(`${RAW_CONTENT_URL}/${file.name}`);
-    if (!response.ok) {
-      console.warn(`Failed to fetch ${file.name}`);
-      return null;
-    }
-    const guide: ParsedGuideWithId = await response.json();
-    return guide;
-  });
+  const guides = await Promise.all(
+    jsonFiles.map(async (file) => {
+      const response = await fetch(`${RAW_CONTENT_URL}/${file.name}`);
+      if (!response.ok) {
+        throw new Error(`Failed to fetch ${file.name}: ${response.statusText}`);
+      }
+      const guide: ParsedGuideWithId = await response.json();
+      return guide;
+    })
+  );
 
-  const guides = await Promise.all(guidePromises);
-
-  // Build record keyed by character ID
   const guidesMap: Record<string, ParsedGuideWithId> = {};
   for (const guide of guides) {
-    if (guide && guide.character?.id) {
+    if (guide.character?.id) {
       guidesMap[guide.character.id] = guide;
     }
   }
 
   return guidesMap;
-}
-
-export async function fetchGuide(
-  characterId: string
-): Promise<ParsedGuideWithId | null> {
-  const guides = await fetchGuides();
-  return guides[characterId] || null;
 }
 
 export function getGuidesSortedByLastUpdated(
@@ -63,16 +64,4 @@ export function getGuidesSortedByLastUpdated(
     const dateB = new Date(b.last_updated).getTime();
     return dateB - dateA;
   });
-}
-
-export function searchGuides(
-  guides: ParsedGuideWithId[],
-  query: string
-): ParsedGuideWithId[] {
-  if (!query.trim()) return guides;
-
-  const lowerQuery = query.toLowerCase();
-  return guides.filter((guide) =>
-    guide.character.name.toLowerCase().includes(lowerQuery)
-  );
 }

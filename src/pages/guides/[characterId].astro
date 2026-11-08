@@ -1,0 +1,32 @@
+---
+import type { GetStaticPaths } from "astro";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer";
+import GuideDetail from "@/views/GuideDetail";
+import { fetchGuides } from "@/services/guideService";
+import { formatElement, formatSpecialty } from "@/lib/guideParser";
+
+export const getStaticPaths = (async () => {
+  const allGuides = await fetchGuides();
+  return Object.values(allGuides).map((guide) => ({
+    params: { characterId: String(guide.character.id) },
+    props: { guide, allGuides },
+  }));
+}) satisfies GetStaticPaths;
+
+const { guide, allGuides } = Astro.props;
+const { name, element, specialty, banner } = guide.character;
+---
+
+<Layout
+  title={`${name} Guide - SZGF`}
+  description={`Complete guide for ${name} in Zenless Zone Zero. ${formatElement(element)} ${formatSpecialty(specialty)} character.`}
+  image={banner}
+>
+  <div class="min-h-screen bg-background">
+    <Header />
+    <GuideDetail guide={guide} allGuides={allGuides} />
+    <Footer />
+  </div>
+</Layout>

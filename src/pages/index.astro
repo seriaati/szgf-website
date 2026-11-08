@@ -1,0 +1,32 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Hero from "@/components/Hero";
+import Features from "@/components/Features";
+import ChangelogPreview from "@/components/ChangelogPreview";
+import GuidesPreview from "@/components/GuidesPreview";
+import ApplicationsPreview from "@/components/ApplicationsPreview";
+import SDKPreview from "@/components/SDKPreview";
+import Footer from "@/components/Footer";
+import { fetchGuides, getGuidesSortedByLastUpdated } from "@/services/guideService";
+
+const [latestGuide] = getGuidesSortedByLastUpdated(await fetchGuides());
+---
+
+<Layout
+  title="SZGF - Standardized Zenless Zone Zero Guide Format"
+  description="A YAML-based format for writing agent guides in Zenless Zone Zero."
+>
+  <div class="min-h-screen bg-background">
+    <Header />
+    <main>
+      <Hero />
+      <Features />
+      <ChangelogPreview />
+      <GuidesPreview latestGuide={latestGuide} />
+      <ApplicationsPreview />
+      <SDKPreview />
+    </main>
+    <Footer />
+  </div>
+</Layout>

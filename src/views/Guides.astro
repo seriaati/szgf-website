@@ -1,0 +1,106 @@
+---
+import type { ParsedGuideWithId } from "szgf";
+import { Input } from "@/components/ui/input";
+import { Search, Calendar, User } from "lucide-react";
+import { formatDate, formatElement, formatSpecialty, getElementIcon, getElementColor, getSpecialtyIcon } from "@/lib/guideParser";
+
+interface Props {
+  guides: ParsedGuideWithId[];
+}
+
+const { guides } = Astro.props;
+---
+
+<main class="pt-32 pb-20">
+  <div class="container px-6">
+    <div class="section-fade mx-auto max-w-6xl">
+      <h1 class="mb-4 text-4xl font-bold sm:text-5xl">
+        <span class="gradient-text">Guides</span>
+      </h1>
+      <p class="mb-8 text-lg text-muted-foreground">
+        Character guides for Zenless Zone Zero
+      </p>
+
+      <div class="relative mb-8 max-w-md">
+        <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+        <Input id="guide-search" type="text" placeholder="Search characters..." className="pl-10" />
+      </div>
+
+      {guides.length === 0 ? (
+        <div class="glass p-8 text-center">
+          <p class="text-muted-foreground">No guides available</p>
+        </div>
+      ) : (
+        <div id="guide-grid" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {guides.map((guide, index) => (
+            <a
+              href={`/guides/${guide.character.id}`}
+              data-name={guide.character.name.toLowerCase()}
+              class="section-fade glass overflow-hidden hover-lift group"
+              style={`animation-delay: ${index * 50}ms`}
+            >
+              <div class="aspect-[16/9] overflow-hidden bg-black/20">
+                <img
+                  src={guide.character.banner}
+                  alt={guide.character.name}
+                  class="h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
+                />
+              </div>
+
+              <div class="p-4">
+                <h2 class="text-xl font-bold mb-2">{guide.character.name}</h2>
+
+                <div class="flex items-center gap-4 text-sm text-muted-foreground">
+                  <span class="flex items-center gap-1">
+                    <User className="h-3 w-3" />
+                    {guide.author}
+                  </span>
+                  <span class="flex items-center gap-1">
+                    <Calendar className="h-3 w-3" />
+                    {formatDate(guide.last_updated)}
+                  </span>
+                </div>
+
+                <div class="mt-3 flex gap-2">
+                  <span class={`flex items-center gap-1 rounded-full bg-white/10 px-2 py-0.5 text-xs ${getElementColor(guide.character.element)}`}>
+                    {getElementIcon(guide.character.element) && (
+                      <img src={getElementIcon(guide.character.element)} alt="" class="w-3 h-3" />
+                    )}
+                    {formatElement(guide.character.element)}
+                  </span>
+                  <span class="flex items-center gap-1 rounded-full bg-white/10 px-2 py-0.5 text-xs">
+                    {getSpecialtyIcon(guide.character.specialty) && (
+                      <img src={getSpecialtyIcon(guide.character.specialty)} alt="" class="w-3 h-3" />
+                    )}
+                    {formatSpecialty(guide.character.specialty)}
+                  </span>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      )}
+
+      <div id="guide-search-empty" class="hidden glass p-8 text-center">
+        <p class="text-muted-foreground">No characters found matching your search</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+  const input = document.getElementById("guide-search") as HTMLInputElement;
+  const cards = document.querySelectorAll<HTMLElement>("#guide-grid > a");
+  const empty = document.getElementById("guide-search-empty")!;
+
+  input.addEventListener("input", () => {
+    const query = input.value.trim().toLowerCase();
+    let visible = 0;
+    for (const card of cards) {
+      const match = card.dataset.name!.includes(query);
+      card.classList.toggle("hidden", !match);
+      if (match) visible++;
+    }
+    empty.classList.toggle("hidden", visible > 0 || cards.length === 0);
+  });
+</script>

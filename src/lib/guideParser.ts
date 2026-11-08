@@ -1,4 +1,8 @@
-import DOMPurify from "dompurify";
+import createDOMPurify from "dompurify";
+import { JSDOM } from "jsdom";
+
+// Guides render at build time in Node, which has no DOM for DOMPurify to use.
+const DOMPurify = createDOMPurify(new JSDOM("").window);
 
 const ICON_MAP: Record<string, string> = {
   // Stat icons

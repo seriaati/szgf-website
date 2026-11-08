@@ -1,0 +1,94 @@
+---
+import { Github, FileText, MessageCircle, Menu, X } from "lucide-react";
+import { Button } from "./ui/button";
+import { pagePath } from "@/lib/utils";
+
+const navItems = [
+  { path: "/", label: "Home" },
+  { path: "/guides", label: "Guides" },
+  { path: "/changelog", label: "Changelog" },
+  { path: "/applications", label: "Applications" },
+  { path: "/sdk", label: "SDK" },
+];
+
+const externalLinks = [
+  { href: "https://docs.szgf.seria.moe", icon: FileText },
+  { href: "https://link.seria.moe/hb-dc", icon: MessageCircle },
+  { href: "https://github.com/seriaati/szgf", icon: Github },
+];
+
+const pathname = pagePath(Astro.url);
+const linkClass = (path: string) =>
+  path === pathname
+    ? "bg-secondary text-foreground"
+    : "text-muted-foreground hover:text-foreground hover:bg-secondary/50";
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border">
+  <div class="mx-auto max-w-7xl px-6 py-3">
+    <nav class="flex items-center justify-between">
+      <a href="/" class="text-lg font-semibold tracking-tight">SZGF</a>
+
+      <div class="hidden md:flex items-center gap-1">
+        {navItems.map((item) => (
+          <a
+            href={item.path}
+            class={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${linkClass(item.path)}`}
+          >
+            {item.label}
+          </a>
+        ))}
+      </div>
+
+      <div class="flex items-center gap-1">
+        {externalLinks.map(({ href, icon: Icon }) => (
+          <a href={href} target="_blank" rel="noopener noreferrer" class="hidden sm:block">
+            <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
+              <Icon className="h-5 w-5" />
+            </Button>
+          </a>
+        ))}
+        <Button
+          id="mobile-menu-toggle"
+          variant="ghost"
+          size="icon"
+          className="md:hidden text-muted-foreground hover:text-foreground"
+        >
+          <Menu className="h-5 w-5 menu-icon-open" />
+          <X className="h-5 w-5 menu-icon-close hidden" />
+        </Button>
+      </div>
+    </nav>
+  </div>
+
+  <div id="mobile-menu" class="hidden md:hidden border-t border-border bg-background/95 backdrop-blur-sm">
+    <div class="px-6 py-4 space-y-1">
+      {navItems.map((item) => (
+        <a
+          href={item.path}
+          class={`block px-4 py-2 rounded-md text-sm font-medium transition-colors ${linkClass(item.path)}`}
+        >
+          {item.label}
+        </a>
+      ))}
+      <div class="flex items-center gap-2 pt-4 border-t border-border mt-4">
+        {externalLinks.map(({ href, icon: Icon }) => (
+          <a href={href} target="_blank" rel="noopener noreferrer">
+            <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
+              <Icon className="h-5 w-5" />
+            </Button>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById("mobile-menu-toggle")!;
+  toggle.addEventListener("click", () => {
+    document.getElementById("mobile-menu")!.classList.toggle("hidden");
+    toggle.querySelector(".menu-icon-open")!.classList.toggle("hidden");
+    toggle.querySelector(".menu-icon-close")!.classList.toggle("hidden");
+  });
+</script>

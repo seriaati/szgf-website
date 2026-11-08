@@ -1,0 +1,35 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer";
+import SDK from "@/views/SDK";
+---
+
+<Layout title="SDK - SZGF" description="Integrate SZGF into your projects programmatically">
+  <div class="min-h-screen bg-background">
+    <Header />
+    <SDK />
+    <Footer />
+  </div>
+</Layout>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>("[data-copy]");
+  let timeout: number | undefined;
+
+  const showCopied = (copied: HTMLButtonElement | null) => {
+    for (const button of buttons) {
+      button.querySelector(".copied-icon")!.classList.toggle("hidden", button !== copied);
+      button.querySelector(".copy-icon")!.classList.toggle("hidden", button === copied);
+    }
+  };
+
+  for (const button of buttons) {
+    button.addEventListener("click", () => {
+      navigator.clipboard.writeText(button.dataset.copy!);
+      showCopied(button);
+      clearTimeout(timeout);
+      timeout = window.setTimeout(() => showCopied(null), 2000);
+    });
+  }
+</script>

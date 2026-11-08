@@ -1,5 +1,4 @@
 import { ArrowRight, Plus, RefreshCw } from "lucide-react";
-import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
 import changelog from "@/data/changelog.json";
 
@@ -20,12 +19,12 @@ const ChangelogPreview = () => {
             <p className="mb-8 text-muted-foreground">
               Stay up to date with the latest improvements and additions to the SZGF standard.
             </p>
-            <Link to="/changelog">
+            <a href="/changelog">
               <Button variant="outline" className="group">
                 View Full Changelog
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
-            </Link>
+            </a>
           </div>
 
           <div className="card-flat p-6">

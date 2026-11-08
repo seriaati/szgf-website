@@ -1,0 +1,20 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer";
+import Guides from "@/views/Guides.astro";
+import { fetchGuides, getGuidesSortedByLastUpdated } from "@/services/guideService";
+
+const guides = getGuidesSortedByLastUpdated(await fetchGuides());
+---
+
+<Layout
+  title="Character Guides - SZGF"
+  description="Character guides for Zenless Zone Zero written in SZGF format"
+>
+  <div class="min-h-screen bg-background">
+    <Header />
+    <Guides guides={guides} />
+    <Footer />
+  </div>
+</Layout>

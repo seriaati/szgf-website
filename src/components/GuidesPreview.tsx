@@ -1,54 +1,10 @@
 import { ArrowRight, Calendar, User } from "lucide-react";
-import { Link } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import type { ParsedGuideWithId } from "szgf";
 import { Button } from "./ui/button";
-import { fetchGuides, getGuidesSortedByLastUpdated } from "@/services/guideService";
 import { formatDate, formatElement, formatSpecialty, getElementIcon, getSpecialtyIcon, getElementColor } from "@/lib/guideParser";
 
-const GuidesPreview = () => {
-  const {
-    data: guidesMap,
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ["guides"],
-    queryFn: fetchGuides,
-    staleTime: 5 * 60 * 1000,
-  });
-
-  const sortedGuides = guidesMap ? getGuidesSortedByLastUpdated(guidesMap) : [];
-  const latestGuide = sortedGuides[0];
-
-  if (isLoading) {
-    return (
-      <section className="relative py-24">
-        <div className="container px-6">
-          <div className="section-fade mb-12 text-center">
-            <span className="mb-4 inline-block text-sm font-medium text-muted-foreground">
-              Character Guides
-            </span>
-            <h2 className="mb-4 text-3xl font-bold sm:text-4xl">
-              Latest Guide
-            </h2>
-            <p className="mx-auto max-w-2xl text-muted-foreground">
-              Expert character guides for Zenless Zone Zero
-            </p>
-          </div>
-          <div className="section-fade mx-auto max-w-4xl animation-delay-200">
-            <div className="card-flat overflow-hidden animate-pulse">
-              <div className="aspect-[21/9] bg-white/5" />
-              <div className="p-6 space-y-4">
-                <div className="h-8 bg-white/10 rounded w-1/3" />
-                <div className="h-4 bg-white/5 rounded w-2/3" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    );
-  }
-
-  if (error || !latestGuide) {
+const GuidesPreview = ({ latestGuide }: { latestGuide?: ParsedGuideWithId }) => {
+  if (!latestGuide) {
     return null;
   }
 
@@ -115,18 +71,18 @@ const GuidesPreview = () => {
               </div>
 
               <div className="flex flex-wrap gap-3">
-                <Link to={`/guides/${latestGuide.character.id}`}>
+                <a href={`/guides/${latestGuide.character.id}`}>
                   <Button>
                     Read Guide
                     <ArrowRight className="h-4 w-4" />
                   </Button>
-                </Link>
-                <Link to="/guides">
+                </a>
+                <a href="/guides">
                   <Button variant="outline" className="group">
                     View All Guides
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </Button>
-                </Link>
+                </a>
               </div>
             </div>
           </div>

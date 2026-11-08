@@ -1,16 +1,20 @@
 {
-  "files": [],
-  "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }],
+  "extends": "astro/tsconfigs/base",
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist"],
   "compilerOptions": {
-    "baseUrl": ".",
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "types": ["vitest/globals"],
     "paths": {
       "@/*": ["./src/*"]
     },
+    "strict": false,
     "noImplicitAny": false,
-    "noUnusedParameters": false,
-    "skipLibCheck": true,
-    "allowJs": true,
+    "strictNullChecks": false,
     "noUnusedLocals": false,
-    "strictNullChecks": false
+    "noUnusedParameters": false,
+    "allowJs": true,
+    "verbatimModuleSyntax": false
   }
 }
